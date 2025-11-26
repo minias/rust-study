@@ -30,3 +30,24 @@ database:
   password: "password"   # MacOS brew 설치 시 기본은 비밀번호 없음
   database: "database"   # 로컬 개발 DB 이름 (직접 생성 필요)
 ```
+
+## Make 명령어
+
+- [example1/README.md 참조](../../example1/Readme.md)
+
+## Debug 실행
+
+> .env.local.yml 가 있는 위치에서 실행해야 실행이됩니다.
+
+```sh
+./target/debug/env
+AppConfig {
+    database: DatabaseConfig {
+        host: "127.0.0.1",
+        port: 3306,
+        user: "exmaple2",
+        password: "exmaple2!",
+        database: "exmaple2",
+    },
+}
+```
