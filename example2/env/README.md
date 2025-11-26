@@ -7,7 +7,7 @@
 | **패키지 명**    | `env` (요구사항 충족)                  |
 | **구조**         | Clean Architecture: model, loader 분리 |
 | **파일 포맷**    | `.yml` (serde_yaml 사용)               |
-| **환경 선택 방식** | `APP_ENV=local/dev/prod` 택1         |
+| **환경 선택 방식** | `RUST_PROFILE=local/dev/prod` 택1         |
 | **캐싱 방식**    | `once_cell::sync::OnceCell`            |
 | **오류 처리**    | `thiserror` 기반 Custom Error          |
 | **확장성**       | 다른 서비스에서도 그대로 재사용 가능   |
