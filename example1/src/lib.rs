@@ -16,66 +16,93 @@ pub fn max_even_sum(mut a: Vec<i32>, k: usize) -> i32 {
 
     let total: i32 = chosen.iter().sum();
 
-    // 이미 짝수면 바로 반환
-    if total % 2 == 0 {
+    if total & 1 == 0 {
         return total;
     }
 
-    // 선택된 요소 중: 가장 작은 홀수, 가장 작은 짝수
-    let mut min_odd_in_chosen: Option<i32> = None;
-    let mut min_even_in_chosen: Option<i32> = None;
-
-    for &v in chosen.iter().rev() {
-        if v % 2 == 0 {
-            min_even_in_chosen = Some(v);
-            break;
-        }
-    }
-    for &v in chosen.iter().rev() {
-        if v % 2 != 0 {
-            min_odd_in_chosen = Some(v);
-            break;
-        }
-    }
-
-    // 선택되지 않은 요소 중: 가장 큰 짝수, 가장 큰 홀수
-    let mut max_even_in_others: Option<i32> = None;
-    let mut max_odd_in_others: Option<i32> = None;
-
-    for &v in others.iter() {
-        if v % 2 == 0 {
-            max_even_in_others = Some(v);
-            break;
-        }
-    }
-    for &v in others.iter() {
-        if v % 2 != 0 {
-            max_odd_in_others = Some(v);
-            break;
-        }
-    }
+    // chosen → 최소값 찾아야 하므로 rev = true
+    let (min_even_in_chosen, min_odd_in_chosen) = find_parity_targets(chosen, true);
+    // others → 최대값 찾아야 하므로 rev = false
+    let (max_even_in_others, max_odd_in_others) = find_parity_targets(others, false);
 
     let mut best = -1;
 
-    // case 1: (선택된 최소 홀수 ↔ 선택되지 않은 최대 짝수)
     if let (Some(ch_odd), Some(oth_even)) = (min_odd_in_chosen, max_even_in_others) {
-        let new_sum = total - ch_odd + oth_even;
-        if new_sum % 2 == 0 {
-            best = best.max(new_sum);
+        if let Some(val) = try_swap(total, ch_odd, oth_even) {
+            best = best.max(val);
         }
     }
 
-    // case 2: (선택된 최소 짝수 ↔ 선택되지 않은 최대 홀수)
     if let (Some(ch_even), Some(oth_odd)) = (min_even_in_chosen, max_odd_in_others) {
-        let new_sum = total - ch_even + oth_odd;
-        if new_sum % 2 == 0 {
-            best = best.max(new_sum);
+        if let Some(val) = try_swap(total, ch_even, oth_odd) {
+            best = best.max(val);
         }
     }
 
     best
 }
 
+// 최적화로 공통 스왑 함수 생성
+// 두 교환 케이스 중 유효한 최대 짝수 합을 계산
+#[inline]
+fn try_swap(total: i32, out: i32, inn: i32) -> Option<i32> {
+    // 짝수 합 조건: (total - out + inn) % 2 == 0 ⇔ (out % 2) == (inn % 2)
+    // => modulo 연산 제거 가능 (branch + bitwise)
+    if (out & 1) == (inn & 1) {
+        Some(total - out + inn)
+    } else {
+        None
+    }
+}
+
+/// 정렬된 slice에서 parity 타겟을 찾음.
+/// rev == true  -> slice.iter().rev() : "작은 값부터" 탐색 (chosen)
+/// rev == false -> slice.iter()     : "큰 값부터" 탐색 (others)
+#[inline]
+fn find_parity_targets(slice: &[i32], rev: bool) -> (Option<i32>, Option<i32>) {
+    let mut even: Option<i32> = None;
+    let mut odd: Option<i32> = None;
+
+    if rev {
+        // chosen: 작은 값(뒤에서)부터 찾아야 하므로 rev 사용
+        for &v in slice.iter().rev() {
+            if v & 1 == 0 {
+                if even.is_none() {
+                    even = Some(v);
+                }
+            } else {
+                if odd.is_none() {
+                    odd = Some(v);
+                }
+            }
+
+            if even.is_some() && odd.is_some() {
+                break;
+            }
+        }
+    } else {
+        // others: 큰 값(앞에서)부터 찾아야 하므로 일반 iter 사용
+        for &v in slice.iter() {
+            if v & 1 == 0 {
+                if even.is_none() {
+                    even = Some(v);
+                }
+            } else {
+                if odd.is_none() {
+                    odd = Some(v);
+                }
+            }
+
+            if even.is_some() && odd.is_some() {
+                break;
+            }
+        }
+    }
+
+    (even, odd)
+}
+
+/// 테스트 코드는 아래처럼 사용
 #[cfg(test)]
 mod tests {
     use super::*;

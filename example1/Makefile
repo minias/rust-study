@@ -2,7 +2,7 @@
 # Rust Project Makefile
 # ----------------------------------------
 
-APP_NAME=exam3
+APP_NAME=exam1
 TARGET_DIR=target/release
 INSTALL_PATH=/usr/local/bin
 
