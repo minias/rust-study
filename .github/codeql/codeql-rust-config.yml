@@ -1,0 +1,13 @@
+# Rust-specific CodeQL configuration
+# Improve call target and type detection
+
+queries:
+  include:
+    - codeql/rust-all.qls
+
+rust:
+  build-cmd: "cargo build --workspace --all-targets"
+  enable-proc-macro: true        # procedural macro 분석 활성화
+  include-generated: true        # build.rs 등에서 생성된 코드 포함
+  include-tests: true            # 테스트 코드 분석
+  max-parallel-builds: 4
