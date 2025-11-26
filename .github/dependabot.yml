@@ -10,12 +10,12 @@ updates:
     commit-message:
       prefix: "deps"
 
-  # 서브패키지 example2
-  #- package-ecosystem: "cargo"
-  #  directory: "/example2"       # example2 경로
-  #  schedule:
-  #    interval: "weekly"
-  #  commit-message:
-  #    prefix: "deps"
+  # 서브패키지 example2  
+  - package-ecosystem: "cargo"
+    directory: "/example2"       # example2 경로
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "deps"
 
   # 필요하면 추가 서브패키지도 동일하게 등록
