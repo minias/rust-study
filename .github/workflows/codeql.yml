@@ -5,8 +5,6 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-  schedule:
-    - cron: '0 3 * * 1' # 매주 월요일 03:00
 
 jobs:
   codeql:
@@ -16,26 +14,27 @@ jobs:
       security-events: write
 
     steps:
-      # 1. 리포지토리 체크아웃
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # 2. CodeQL 초기화 (v4)
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v4
         with:
-          languages: rust
+          languages: |
+            rust
           config-file: .github/codeql/codeql-rust-config.yml
 
-      # 3. Rust workspace 자동 빌드
       - name: Build all workspace crates
         run: |
-          # 모든 example* crate 자동 탐지
-          for crate in $(find . -maxdepth 1 -type d -name "example*"); do
-            echo "Building crate: $crate"
-            cargo build --manifest-path "$crate/Cargo.toml" --all-targets
-          done
+          set -e
+          crates=$(find . -maxdepth 1 -type d -name "example*")
+          if [ -n "$crates" ]; then
+            for crate in $crates; do
+              echo "Building crate: $crate"
+              cargo build --manifest-path "$crate/Cargo.toml" --all-targets
+            done
+          else
+            echo "No example* crates found"
+          fi
 
-      # 4. CodeQL 분석 수행
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v4
