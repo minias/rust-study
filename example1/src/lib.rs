@@ -63,39 +63,21 @@ fn find_parity_targets(slice: &[i32], rev: bool) -> (Option<i32>, Option<i32>) {
     let mut even: Option<i32> = None;
     let mut odd: Option<i32> = None;
 
-    if rev {
-        // chosen: 작은 값(뒤에서)부터 찾아야 하므로 rev 사용
-        for &v in slice.iter().rev() {
-            if v & 1 == 0 {
-                if even.is_none() {
-                    even = Some(v);
-                }
-            } else {
-                if odd.is_none() {
-                    odd = Some(v);
-                }
-            }
-
-            if even.is_some() && odd.is_some() {
-                break;
-            }
-        }
+    let iter: Box<dyn Iterator<Item=&i32>> = if rev {
+        Box::new(slice.iter().rev())
     } else {
-        // others: 큰 값(앞에서)부터 찾아야 하므로 일반 iter 사용
-        for &v in slice.iter() {
-            if v & 1 == 0 {
-                if even.is_none() {
-                    even = Some(v);
-                }
-            } else {
-                if odd.is_none() {
-                    odd = Some(v);
-                }
-            }
+        Box::new(slice.iter())
+    };
 
-            if even.is_some() && odd.is_some() {
-                break;
-            }
+    for &v in iter {
+        if v & 1 == 0 && even.is_none() {
+            even = Some(v);
+        } else if v & 1 == 1 && odd.is_none() {
+            odd = Some(v);
+        }
+
+        if even.is_some() && odd.is_some() {
+            break;
         }
     }
 
