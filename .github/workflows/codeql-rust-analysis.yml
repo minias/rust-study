@@ -1,0 +1,44 @@
+name: "CodeQL Analysis - Rust Workspace"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 3 * * 1' # 매주 월요일 03:00
+
+jobs:
+  codeql:
+    name: Analyze (Rust)
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ "rust" ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          # Rust-specific flags to improve analysis quality
+          config-file: .github/codeql/codeql-rust-config.yml
+
+      - name: Autobuild workspace crates
+        run: |
+          # Build all workspace crates to help CodeQL detect dependencies
+          cargo build --workspace --all-targets
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:rust"
