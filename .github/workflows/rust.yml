@@ -41,7 +41,9 @@ jobs:
     - name: Build
       working-directory: ./${{ matrix.project }}
       run: cargo build --verbose
-
+    - name: Build project
+      working-directory: ./example2/env   # 프로젝트 루트 지정
+      run: cargo build --workspace --all-targets
     - name: Run tests
       working-directory: ./${{ matrix.project }}
       run: cargo test --verbose
