@@ -1,4 +1,4 @@
-name: Rust
+name: Rust Workspaces CI
 
 on:
   push:
@@ -6,17 +6,42 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-  CARGO_TERM_COLOR: always
-
 jobs:
-  build:
-
+  build-test:
     runs-on: ubuntu-latest
 
+    # Rust 프로젝트들이 들어 있는 폴더들을 매트릭스로 정의
+    # 원하는 프로젝트 디렉토리를 추가하면 자동으로 테스트됨
+    strategy:
+      matrix:
+        project: [ "example1" ]
+        # 이후 추가될경우 변경
+        #project: [ "example1", "example2", "example3" ]
+
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout source
+      uses: actions/checkout@v3
+
+    - name: Install Rust toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+
+    # 캐시 적용으로 빌드 시간 단축 (선택사항)
+    - name: Cache cargo registry
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+        restore-keys: ${{ runner.os }}-cargo-
+
     - name: Build
+      working-directory: ./${{ matrix.project }}
       run: cargo build --verbose
+
     - name: Run tests
+      working-directory: ./${{ matrix.project }}
       run: cargo test --verbose
