@@ -1,13 +1,6 @@
 # Dependabot 설정 (Rust Workspace + example1, example2 서브패키지)
 version: 2
 updates:
-  # 루트 Cargo.toml
-  - package-ecosystem: "cargo"
-    directory: "/"                # 루트 Cargo.toml
-    schedule:
-      interval: "weekly"
-    commit-message:
-      prefix: "deps"
 
   # 서브패키지 example1
   - package-ecosystem: "cargo"
