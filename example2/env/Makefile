@@ -2,7 +2,7 @@
 # Rust Project Makefile
 # ----------------------------------------
 
-APP_NAME=exam2
+APP_NAME=env
 TARGET_DIR=target/release # Ext SSD 라서 오류가 발생
 # 아래 메시지는 외장 SSD 라서 나며, 빌드는 정상
 # warning: hard linking files in the incremental compilation cache failed. copying files instead. ...
@@ -37,7 +37,7 @@ debug:
 	cargo build
 
 fix:
-	cargo fix --lib -p env
+	cargo fix --lib -p env --allow-dirty
 
 run: build
 	$(TARGET_DIR)/$(APP_NAME) $(ARGS)
