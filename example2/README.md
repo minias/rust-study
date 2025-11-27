@@ -1,5 +1,44 @@
 # example2
 
+## IA
+
+```sh
+rust-study/example2
+├── env
+│   ├── Cargo.lock
+│   ├── Cargo.toml
+│   ├── env.sample.yml
+│   ├── Makefile
+│   └── src
+│       ├── lib.rs
+│       ├── loader.rs
+│       ├── main.rs
+│       └── model.rs
+└── mariaDb
+    ├── Cargo.toml
+    ├── Makefile
+    └── src
+        └── main.rs
+```
+
+## example2 workspace 설정
+
+> ✅ 1. 상위 workspace 구성 추천
+
+두 패키지가 서로 독립 패키지인데, 의존관계를 명확하게 하려면 workspace 로 묶는 것이 좋습니다.
+
+> example2/Cargo.toml
+
+```toml
+[workspace]
+members = [
+    "env",
+    "mariaDb"
+]
+```
+
+> 이제 cargo build 시 전체 관리가 가능함.
+
 ## Mysql/MariaDB 를 로컬에서 연결
 
 > Macos install MariaDB
