@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "example1",
+    "example2/env",    
+    "example2/mariaDb",    
+    "example3",
+    "example4",
+    "example5",
+]
