@@ -14,7 +14,7 @@ jobs:
     # 원하는 프로젝트 디렉토리를 추가하면 자동으로 테스트됨
     strategy:
       matrix:
-        project: [ "example1", "example2/env" ]
+        project: [ "example1", "example2/env", "example2/mariaDb" , "example3" ]
         # 이후 추가될경우 변경
         #project: [ "example1", "example2", "example3" ]
 
