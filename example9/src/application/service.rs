@@ -10,7 +10,8 @@ impl AwsService {
     pub async fn process(&self) -> Result<(), anyhow::Error> {
         //AWS secret manager 호출먼저
         let secret = aws_secrets::load_secret_json("my/secret/name").await?;
-        println!("Loaded secret: {:?}", secret);
+        //Cleartext logging of sensitive information
+        //println!("Loaded secret: {:?}", secret); //보안이슈
         println!("DB URL: {}", secret.db_url);
         println!("API Key: {}", secret.api_key);
         
