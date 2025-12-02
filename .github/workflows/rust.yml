@@ -1,4 +1,6 @@
-name: Rust CI
+name: Rust Workspaces CI
+permissions:
+  contents: read
 
 on:
   push:
