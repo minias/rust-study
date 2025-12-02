@@ -10,27 +10,25 @@
 ```sh
 rust-study/example9/
 ├── Cargo.toml
-├── README.md
+├── env.sample.yml
+├── env.sample.yml
 └── src/
+    ├── lib.rs
+    ├── main.rs
     ├── domain/
     │      ├── mod.rs
-    │      └── s3.rs              # Domain 모델(Struct, Entity)
-    │
+    │      └── s3.rs
     ├── usecase/
     │      ├── mod.rs
-    │      └── s3_service.rs      # S3 워크플로우 유즈케이스
-    │
+    │      └── s3_service.rs
     ├── infra/
     │      ├── mod.rs
-    │      ├── secrets_manager.rs # AWS Secret Manager 어댑터
-    │      └── s3_client.rs       # AWS S3 Client 어댑터
-    │
+    │      ├── secrets_manager.rs
+    │      └── s3_client.rs
     ├── interfaces/
     │      ├── mod.rs
-    │      └── cli.rs             # CLI 기반 API (REST로 변경 가능)
-    │
-    ├── app/
-    │      └── main.rs            # App Entrypoint
-    │
-    └── lib.rs
+    │      └── cli.rs
+    └── env/
+            ├── mod.rs
+            └── config.rs
 ```

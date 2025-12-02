@@ -1,51 +1,37 @@
-# .github/workflows/rust.yml
-name: Rust Workspaces CI
+name: Rust CI
 
+# PR에서는 실행하지 않고, main 브랜치에 merge(push) 될 때만 실행
 on:
   push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+    branches:
+      - main
 
 jobs:
-  build-test:
+  build:
+    name: Build and Test
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        project: [
-          "example1",
-          "example2/env",
-          "example2/mariaDb",
-          "example3",
-          "example4",
-          "example5",
-          "example6",
-          "example9"
-        ]
 
     steps:
-      - name: Checkout source
+      # 1. 저장소 체크아웃
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Rust toolchain (stable)
-        uses: dtolnay/rust-toolchain@v1
+      # 2. Rust 설치
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-          components: rustfmt, clippy
+          profile: minimal
+          override: true
 
-      - name: Cache cargo registry
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-
+      # 3. 의존성 설치 및 빌드
+      - name: Build
+        run: cargo build --verbose
 
-      - name: Build and Test
-        working-directory: ./${{ matrix.project }}
-        run: |
-          cargo build --all-targets --verbose
-          cargo test --all --verbose
+      # 4. 테스트 실행
+      - name: Run tests
+        run: cargo test --verbose
+
+      # 5. clippy로 코드 검사 (선택)
+      - name: Run clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
