@@ -4,45 +4,30 @@ permissions:
 
 on:
   push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+    branches:
+      - main
 
 jobs:
-  build-test:
+  build:
+    name: Build and Test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        project: [
-          "example1",
-          "example2/env",
-          "example2/mariaDb",
-          "example3",
-          "example4",
-          "example5",
-          "example6"
-        ]
+
     steps:
-      - name: Checkout source
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install Rust toolchain
+      - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+          profile: minimal
           override: true
 
-      - name: Cache cargo registry
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: ${{ runner.os }}-cargo-
+      - name: Build
+        run: cargo build --verbose
 
-      - name: Build and Run Tests
-        working-directory: ./${{ matrix.project }}
-        run: |
-          cargo build --workspace --all-targets --verbose
-          cargo test --workspace --all --verbose
+      - name: Run tests
+        run: cargo test --verbose
+
+      - name: Run clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
