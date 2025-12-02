@@ -1,6 +1,5 @@
 name: Rust CI
 
-# PR에서는 실행하지 않고, main 브랜치에 merge(push) 될 때만 실행
 on:
   push:
     branches:
@@ -12,11 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. 저장소 체크아웃
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      # 2. Rust 설치
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
@@ -24,14 +21,11 @@ jobs:
           profile: minimal
           override: true
 
-      # 3. 의존성 설치 및 빌드
       - name: Build
         run: cargo build --verbose
 
-      # 4. 테스트 실행
       - name: Run tests
         run: cargo test --verbose
 
-      # 5. clippy로 코드 검사 (선택)
       - name: Run clippy
         run: cargo clippy --all-targets --all-features -- -D warnings
