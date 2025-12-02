@@ -1,3 +1,4 @@
+# .github/workflows/rust.yml
 name: Rust Workspaces CI
 
 on:
@@ -9,6 +10,7 @@ on:
 jobs:
   build-test:
     runs-on: ubuntu-latest
+    
     strategy:
       matrix:
         project: [
@@ -18,17 +20,19 @@ jobs:
           "example3",
           "example4",
           "example5",
-          "example6"
+          "example6",
+          "example9"
         ]
+
     steps:
       - name: Checkout source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Install Rust toolchain
-        uses: actions-rs/toolchain@v1
+      - name: Install Rust toolchain (stable)
+        uses: dtolnay/rust-toolchain@v1
         with:
           toolchain: stable
-          override: true
+          components: rustfmt, clippy
 
       - name: Cache cargo registry
         uses: actions/cache@v3
@@ -37,10 +41,11 @@ jobs:
             ~/.cargo/registry
             ~/.cargo/git
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: ${{ runner.os }}-cargo-
+          restore-keys: |
+            ${{ runner.os }}-cargo-
 
-      - name: Build and Run Tests
+      - name: Build and Test
         working-directory: ./${{ matrix.project }}
         run: |
-          cargo build --workspace --all-targets --verbose
-          cargo test --workspace --all --verbose
+          cargo build --all-targets --verbose
+          cargo test --all --verbose
