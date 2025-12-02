@@ -10,6 +10,7 @@
 - [통합 테스트 모듈 분리](./example3/)
 - [단일파일로 러스트 실행 및 테스트](./example4/)
 - [기본 restful API](./example6/)
+- [AWS S3+SecretManager](./example9/)
 
 ### 참고 문서 & 사이트
 
