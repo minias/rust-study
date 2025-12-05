@@ -9,8 +9,8 @@
         3자리 문자열 (Mon,...Sun)
 */
 
-/// constants.rs로 분리해서 전역변수,상수등을 관리합니다.
-//const DAYS: [&str; 7] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+// constants.rs로 분리해서 전역변수,상수등을 관리합니다.
+// const DAYS: [&str; 7] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 // constants.rs 파일을 모듈로 선언
 pub mod constants;  // pub 추가
