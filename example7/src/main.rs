@@ -26,6 +26,7 @@ async fn main() {
         )
         .with(tracing_subscriber::fmt::layer())
         .init();
+    // macos 에서는 sudo 권한 없이 80과 443리스닝 할수 없음
     //called `Result::unwrap()` on an `Err` value: Os { code: 13, kind: PermissionDenied, message: "Permission denied" }
     //  note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace    
     let ports = Ports {

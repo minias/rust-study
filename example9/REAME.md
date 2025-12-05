@@ -4,6 +4,7 @@
 
 - AWS security manager 연결
 - AWS S3 연결, 버킷생성, 파일 업로드, 파일 다운로드
+- [rust aws예제](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rustv1)
 
 ## IA
 
