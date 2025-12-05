@@ -8,6 +8,7 @@ use example9::{
 
 #[tokio::main]
 async fn main() {
+
     let secrets = SecretsAdapter::new().await;
     let aws_cfg = AwsConfig::default();
     let s3_cred = S3Credential {
