@@ -1,0 +1,9 @@
+[package]
+name = "example_sss"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+shamirsecretsharing = "0.1.5"
+rand = "0.8"
+hex = "0.4"
