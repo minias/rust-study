@@ -1,4 +1,4 @@
-// FILE: src/main.rs
+// src/main.rs
 mod i18n_service;
 mod greeting_service;
 mod api_gateway;

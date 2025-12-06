@@ -16,13 +16,8 @@ fn main() {
 
     println!("🟩 [생성된 Shares - 총 3개]");
     for (i, s) in shares.iter().enumerate() {
-        println!("  share[{}] (len={}): {}", i, s.len(), hex::encode(s));
+        println!("share[{}] (len={}): {}", i, s.len(), hex::encode(s));
     }
-    println!("==================================================\n");
-    println!("🟨 [복호화에 사용할 Share 2개]");
-    println!("  share[0]: {}", hex::encode(shares[0].clone()));
-    println!("  share[1]: {}", hex::encode(shares[1].clone()));    
-    println!("  share[2]: {}", hex::encode(shares[2].clone()));
     println!("==================================================\n");
 
     let selected1 = vec![shares[0].clone(), shares[1].clone()];    
@@ -40,9 +35,9 @@ fn main() {
         .expect("threshold 부족");
 
     println!("🟪 [복호화된 시크릿]");
-    println!("{}", hex::encode(&restored1)); // 0,1 검증키
-    println!("{}", hex::encode(&restored2)); // 0,2 검증키
-    println!("{}", hex::encode(&restored3)); // 1,2 검증키
+    println!("share[0,1] {}", hex::encode(&restored1)); // 0,1 검증키
+    println!("share[0,2] {}", hex::encode(&restored2)); // 0,2 검증키
+    println!("share[1,2] {}", hex::encode(&restored3)); // 1,2 검증키
     println!("==================================================\n");
 
 }
