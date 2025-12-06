@@ -9,7 +9,7 @@ pub fn generate() -> Vec<u8> {
     secret
 }
 
-/// 128바이트 랜덤 시드 생성
+/// 128바이트 랜덤 시드 생성 (예정)
 #[allow(dead_code)]
 pub fn generate_128() -> Vec<u8> {
     let mut seed = vec![0u8; DATA_SIZE_128];

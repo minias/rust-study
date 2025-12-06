@@ -1,4 +1,4 @@
-// FILE: src/api_gateway.rs
+// src/api_gateway.rs
 use crate::greeting_service::GreetingService;
 use crate::i18n_service::Lang;
 

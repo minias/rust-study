@@ -1095,7 +1095,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "exam1"
+name = "example1"
 version = "0.1.0"
 
 [[package]]

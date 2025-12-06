@@ -1,13 +1,13 @@
 // src/main.rs
 
-// exam1 패키지의 lib.rs 에 정의된 max_even_sum() 함수를 사용한다.
-use exam1::max_even_sum;
+// example1 패키지의 lib.rs 에 정의된 max_even_sum() 함수를 사용한다.
+use example1::max_even_sum;
 
 /// CLI 인자 기반으로 max_even_sum()을 호출하는 메인 엔트리.
 ///
 /// 사용 예:
 /// ```bash
-/// ./exam1 4 9 8 2 6 3 3
+/// ./example1 4 9 8 2 6 3 3
 /// # ↑ 숫자들 ... 마지막 숫자(K)
 /// ```
 ///

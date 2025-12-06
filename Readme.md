@@ -11,7 +11,9 @@
 - [단일파일로 러스트 실행 및 테스트](./example4/)
 - [기본 restful API](./example6/)
 - [https graceful shutdown](./example7/)
+- [다국어 지원 (i18n)](./example8/)
 - [AWS S3+SecretManager](./example9/)
+- [example_sss](./example_sss/)
 
 ### 참고 문서 & 사이트
 
