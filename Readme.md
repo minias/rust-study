@@ -16,6 +16,55 @@
 - [example_sss](./example_sss/)
 - [btc,eth,tron HD 지갑생성](./example10/)
 
+## IA
+
+```sh
+├── example_sss
+│   └── src
+├── example1
+│   └── src
+├── example10
+│   ├── common
+│   │   └── src
+│   ├── src
+│   └── wallet
+│       ├── bitcoin
+│       │   └── src
+│       ├── ethereum
+│       │   └── src
+│       └── tron
+│           └── src
+├── example2
+│   ├── env
+│   │   └── src
+│   └── mariaDb
+│       └── src
+│           └── db
+├── example3
+│   ├── src
+│   └── tests
+├── example4
+├── example5
+│   └── src
+├── example6
+│   └── src
+│       ├── controllers
+│       ├── models
+│       ├── router
+│       └── services
+├── example7
+│   └── src
+├── example8
+│   └── src
+└── example9
+    └── src
+        ├── domain
+        ├── env
+        ├── infra
+        ├── interfaces
+        └── usecase
+```
+
 ### 참고 문서 & 사이트
 
 - [easy_rust](https://dhghomon.github.io/easy_rust/)
