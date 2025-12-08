@@ -1,0 +1,10 @@
+[package]
+name = "wallet_ethereum"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+common = { path = "../../common" }
+sha3 = "0.10"
+secp256k1 = "0.29"
+hex = "0.4"

@@ -1,0 +1,20 @@
+[workspace]
+members = [
+    "./common",
+    "wallet/bitcoin",
+    "wallet/ethereum",
+    "wallet/tron"
+]
+
+resolver = "2"
+
+[package]
+name = "example10"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+common = { path = "common" }
+wallet_bitcoin = { path = "wallet/bitcoin" }
+wallet_ethereum = { path = "wallet/ethereum" }
+wallet_tron = { path = "wallet/tron" }

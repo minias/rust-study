@@ -1,0 +1,5 @@
+[toolchain]
+channel = "stable"                      # 사용 Rust 채널/버전
+profile = "default"                     # rustup 설치 시 사용할 설치 프로필
+components = [ "rustfmt", "clippy" ]    # 설치할 부가 구성 요소
+targets = []                            # cross compile용 target 리스트, 비워두면 기본 target만 설치

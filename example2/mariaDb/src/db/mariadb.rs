@@ -1,9 +1,9 @@
 // src/db/mariadb.rs
-//! MariaDB Driver Implementation
-//! - OnceLock + Arc 를 활용한 전역 Pool 초기화
-//! - 환경설정 기반 DSN 생성
-//! - sqlx::mysql 전용 Pool 사용
-//! - 클린아키텍처 기반: DriverTrait 구현부 분리
+/// MariaDB Driver Implementation
+/// - OnceLock + Arc 를 활용한 전역 Pool 초기화
+/// - 환경설정 기반 DSN 생성
+/// - sqlx::mysql 전용 Pool 사용
+/// - 클린아키텍처 기반: DriverTrait 구현부 분리
 
 use std::sync::{Arc, OnceLock};
 
