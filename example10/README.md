@@ -100,3 +100,7 @@ BTC: 007839e11c6598d7d426eadc1b75762fb02e5a8d368de8767c
 ETH: 0xa2c47e04d1a25e3484fe508676b6e1929cb3ee17
 TRON: 41a2c47e04d1a25e3484fe508676b6e1929cb3ee17
 ```
+
+## 참고
+
+- [니모닉](https://learnmeabitcoin.com/technical/keys/hd-wallets/mnemonic-seed/?utm_source=chatgpt.com)
