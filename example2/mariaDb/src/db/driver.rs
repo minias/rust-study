@@ -1,7 +1,7 @@
 // src/db/driver.rs
-//! 공용 Database Driver Trait
-//!
-//! 클린 아키텍처를 위해 모든 DB 드라이버는 이 Trait을 구현해야 한다.
+/// 공용 Database Driver Trait
+///
+/// 클린 아키텍처를 위해 모든 DB 드라이버는 이 Trait을 구현해야 한다.
 
 use async_trait::async_trait;
 use sqlx::Error;

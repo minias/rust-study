@@ -1,5 +1,5 @@
 // src/model.rs
-//! 환경설정 모델 정의
+/// 환경설정 모델 정의
 use serde::Deserialize;
 
 /// 공통 앱 설정 구조체

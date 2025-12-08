@@ -1,0 +1,11 @@
+[package]
+name = "wallet_bitcoin"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+common = { path = "../../common" }
+secp256k1 = "0.29"
+sha2 = "0.10"
+ripemd = "0.1"
+hex = "0.4"

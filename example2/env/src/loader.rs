@@ -1,6 +1,6 @@
-//! YAML 환경설정 파일 로더
-//! - .env.{RUST_PROFILE}.yml 파일 로드
-//! - once_cell 로 Lazy static 캐싱
+/// YAML 환경설정 파일 로더
+/// - .env.{RUST_PROFILE}.yml 파일 로드
+/// - once_cell 로 Lazy static 캐싱
 
 use crate::model::AppConfig;
 use once_cell::sync::OnceCell;

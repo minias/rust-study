@@ -2,12 +2,14 @@
 resolver = "3"
 members = [
     "example1",
-    "example2/env",    
-    "example2/mariaDb",    
+    "example2/env",
+    "example2/mariaDb",
     "example3",
     "example4",
-    "example5", 
-    "example6", 
-    "example7", "example8",
-    "example9", "example_sss",    
+    "example5",
+    "example6",
+    "example7",
+    "example8",
+    "example9",
+    "example_sss",
 ]
